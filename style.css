@@ -1,0 +1,692 @@
+
+/* =========================
+   1. VARIABLES & RESET
+========================= */
+
+:root {
+  --bg: #0b0915;
+  --pink: #ff78ad;
+  --pink-light: #ffc0d9;
+  --gold: #e6c68a;
+  --text: #fff3f8;
+  --muted: #c9bdcf;
+  --border: rgba(255, 120, 173, 0.25);
+  --shadow: 0 20px 70px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Cairo", sans-serif;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(130, 36, 83, .2), transparent 42%),
+    radial-gradient(ellipse at 85% 70%, rgba(83, 48, 120, .18), transparent 45%),
+    linear-gradient(145deg, #100b1c, #080810);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+
+.container {
+  width: min(1120px, 90%);
+  margin-inline: auto;
+}
+
+.pink {
+  color: var(--pink);
+}
+
+/* =========================
+   2. STAR BACKGROUND
+========================= */
+
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px var(--pink-light);
+  animation: twinkle var(--duration, 4s) ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: .15;
+    transform: scale(.7);
+  }
+
+  to {
+    opacity: .9;
+    transform: scale(1.4);
+  }
+}
+
+/* =========================
+   3. NAVIGATION
+========================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 9, 21, .86);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav {
+  min-height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--pink-light);
+  direction: ltr;
+  font-family: "Great Vibes", cursive;
+  font-size: 36px;
+  white-space: nowrap;
+}
+
+.logo span {
+  color: var(--pink);
+  font-family: sans-serif;
+  font-size: 30px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.nav-links a {
+  transition: color .25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--pink);
+}
+
+/* =========================
+   4. HERO
+========================= */
+
+.hero {
+  min-height: 650px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 90px 20px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(9, 7, 17, .42), rgba(11, 9, 21, .6) 75%),
+    radial-gradient(ellipse at 50% 40%, rgba(137, 40, 91, .2), transparent 60%);
+}
+
+.moon {
+  position: absolute;
+  top: 65px;
+  right: 12%;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #ffe6c0;
+  box-shadow: 0 0 50px rgba(255, 197, 153, .22);
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  right: -17px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #100c1b;
+}
+
+.hero-content {
+  max-width: 760px;
+  animation: enter 1.1s ease both;
+}
+
+.eyebrow {
+  color: var(--pink);
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  color: var(--pink-light);
+  font-size: clamp(65px, 11vw, 112px);
+  font-weight: 800;
+  line-height: 1.5;
+  text-shadow: 0 0 45px rgba(255, 120, 173, .25);
+}
+
+.hero h1 span {
+  font-size: .5em;
+  vertical-align: middle;
+  color: var(--pink);
+}
+
+.hero h2 {
+  font-size: clamp(17px, 3vw, 23px);
+  font-weight: 500;
+  margin: 5px 0 18px;
+}
+
+.hero p {
+  max-width: 560px;
+  margin-inline: auto;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 2.3;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 29px;
+  margin-top: 27px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff9bc2, #e65a91);
+  color: #280c1a;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 35px rgba(255, 80, 145, .18);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(255, 80, 145, .3);
+}
+
+/* =========================
+   5. SECTION HEADINGS
+========================= */
+
+.section {
+  padding: 75px 0;
+  scroll-margin-top: 75px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.section-heading h2 {
+  color: var(--pink-light);
+  font-size: clamp(25px, 4vw, 35px);
+  line-height: 1.7;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.ornament {
+  width: 100px;
+  height: 1px;
+  margin: 15px auto;
+  background: linear-gradient(90deg, transparent, var(--pink), transparent);
+}
+
+/* =========================
+   6. CARDS
+========================= */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 28px 20px 24px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+  backdrop-filter: blur(10px);
+  transition: transform .35s, border-color .35s, background .35s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 120, 173, .65);
+  background: rgba(255, 120, 173, .055);
+}
+
+.card-icon {
+  display: block;
+  font-size: 39px;
+  line-height: 1.5;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  color: var(--pink-light);
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2.2;
+}
+
+.card .tiny-heart {
+  display: block;
+  margin-top: 10px;
+  color: var(--pink);
+}
+
+/* =========================
+   7. LETTER
+========================= */
+
+.letter-frame {
+  padding: 1px;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(255,120,173,.07), rgba(255,255,255,.01));
+  box-shadow: var(--shadow);
+}
+
+.letter {
+  padding: clamp(25px, 5vw, 50px);
+  border-radius: inherit;
+  background: rgba(14, 11, 23, .65);
+}
+
+.letter-top {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.letter-top .icon {
+  font-size: 38px;
+  color: var(--pink);
+}
+
+.letter-top h3 {
+  color: var(--pink-light);
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+.letter-body {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.letter-body p {
+  color: #e4d9e8;
+  font-size: 15px;
+  line-height: 2.5;
+  margin-bottom: 18px;
+}
+
+.letter-body p:first-child::first-letter {
+  color: var(--pink-light);
+}
+
+.signature {
+  direction: ltr;
+  text-align: center;
+  font-family: "Great Vibes", cursive;
+  font-size: 38px;
+  color: var(--pink);
+  margin-top: 22px;
+}
+
+/* =========================
+   8. SECRET MESSAGE
+========================= */
+
+.secret {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.secret summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 22px;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--pink-light);
+  cursor: pointer;
+  list-style: none;
+  background: rgba(255, 120, 173, .035);
+  transition: background .3s;
+}
+
+.secret summary::-webkit-details-marker {
+  display: none;
+}
+
+.secret summary:hover {
+  background: rgba(255, 120, 173, .1);
+}
+
+.secret summary .gift {
+  color: var(--pink);
+  font-size: 23px;
+}
+
+.secret-message {
+  max-width: 600px;
+  margin: 22px auto 0;
+  padding: 25px;
+  color: var(--pink-light);
+  line-height: 2.4;
+  background: rgba(255, 120, 173, .06);
+  border: 1px solid rgba(255, 120, 173, .16);
+  border-radius: 18px;
+  animation: enter .5s ease both;
+}
+
+/* =========================
+   9. CLOSING
+========================= */
+
+.closing {
+  text-align: center;
+  padding: 70px 15px 90px;
+}
+
+.closing .big-heart {
+  display: inline-block;
+  font-size: 50px;
+  color: var(--pink);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.closing h2 {
+  color: var(--pink-light);
+  font-size: clamp(25px, 5vw, 36px);
+  margin: 12px 0;
+}
+
+.closing p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.closing-second {
+  margin-top: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  color: #a99bad;
+  font-size: 12px;
+  border-top: 1px solid rgba(255, 120, 173, .14);
+}
+
+footer .footer-sign {
+  color: var(--pink-light);
+  font-family: "Great Vibes", cursive;
+  font-size: 25px;
+  direction: ltr;
+  margin-bottom: 5px;
+}
+
+/* =========================
+   10. BACK TO TOP
+========================= */
+
+.top-button {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 20;
+  width: 45px;
+  height: 45px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(20, 13, 30, .9);
+  color: var(--pink-light);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: .3s;
+}
+
+.top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* =========================
+   11. FLOATING HEARTS
+========================= */
+
+.floating-heart {
+  position: fixed;
+  z-index: 30;
+  bottom: -30px;
+  pointer-events: none;
+  color: var(--pink);
+  animation: float-up 3s ease-out forwards;
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(.6);
+  }
+
+  15% {
+    opacity: .9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-90vh) rotate(35deg) scale(1.3);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.13);
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   12. RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .hero {
+    min-height: 570px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav {
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 0 13px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px 15px;
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 570px;
+    padding: 70px 20px;
+  }
+
+  .moon {
+    top: 35px;
+    right: 8%;
+    width: 45px;
+    height: 45px;
+  }
+
+  .moon::after {
+    width: 45px;
+    height: 45px;
+    right: -12px;
+    top: -6px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 25px 22px;
+  }
+
+  .section {
+    padding: 55px 0;
+  }
+
+  .letter {
+    padding: 25px 18px;
+  }
+
+  .letter-body p {
+    font-size: 14px;
+  }
+
+  .secret summary {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .secret-message {
+    padding: 18px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
